@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class Carpeta implements Serializable{
+public class Carpeta {
     private String nombre;
     private String link;
     private ArrayList<Archivo> archivos = new ArrayList();
     private ArrayList<Carpeta> carpetas = new ArrayList();
 
-    public Carpeta(String nombre, String link) {
+    public Carpeta(String nombre) {
         this.nombre = nombre;
         String lk = "";
         for (int i = 0; i < 5; i++) {

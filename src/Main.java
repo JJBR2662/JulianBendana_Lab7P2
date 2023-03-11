@@ -1,8 +1,12 @@
+
+import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author bayer
@@ -12,8 +16,13 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
+    int bandera = 0;
+
     public Main() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        admin = new AdministrarTodos();
+        arbol.setModel((DefaultTreeModel) admin.getMiunidad().getModel());
     }
 
     /**
@@ -25,38 +34,410 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jp_carpetas = new javax.swing.JPopupMenu();
+        crearcarpeta_carpeta = new javax.swing.JMenuItem();
+        creararchivo_carpeta = new javax.swing.JMenuItem();
+        descargarcarpeta = new javax.swing.JMenuItem();
+        destacar = new javax.swing.JMenuItem();
+        eliminar = new javax.swing.JMenuItem();
+        jp_archivo = new javax.swing.JPopupMenu();
+        mandardest = new javax.swing.JMenuItem();
+        elim = new javax.swing.JMenuItem();
+        jp_root = new javax.swing.JPopupMenu();
+        crearcarpeta_root = new javax.swing.JMenuItem();
+        creararchivo_root = new javax.swing.JMenuItem();
+        jf_crearArchivo = new javax.swing.JFrame();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jt_nombrear = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jc_ext = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jf_tamano = new javax.swing.JFormattedTextField();
+        jButton4 = new javax.swing.JButton();
+        jf_crearCarpeta = new javax.swing.JFrame();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jt_nombrecar = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jProgressBar2 = new javax.swing.JProgressBar();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        arbol = new javax.swing.JTree();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
+        crearcarpeta_carpeta.setText("Crear Carpeta");
+        crearcarpeta_carpeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearcarpeta_carpetaActionPerformed(evt);
+            }
+        });
+        jp_carpetas.add(crearcarpeta_carpeta);
+
+        creararchivo_carpeta.setText("Crear Archivo");
+        creararchivo_carpeta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                creararchivo_carpetaMouseClicked(evt);
+            }
+        });
+        creararchivo_carpeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creararchivo_carpetaActionPerformed(evt);
+            }
+        });
+        jp_carpetas.add(creararchivo_carpeta);
+
+        descargarcarpeta.setText("Descargar");
+        jp_carpetas.add(descargarcarpeta);
+
+        destacar.setText("Destacar");
+        jp_carpetas.add(destacar);
+
+        eliminar.setText("Eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
+        jp_carpetas.add(eliminar);
+
+        mandardest.setText("Mandar a Destacados");
+        jp_archivo.add(mandardest);
+
+        elim.setText("Eliminar");
+        elim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                elimActionPerformed(evt);
+            }
+        });
+        jp_archivo.add(elim);
+
+        crearcarpeta_root.setText("Crear Carpeta");
+        crearcarpeta_root.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearcarpeta_rootActionPerformed(evt);
+            }
+        });
+        jp_root.add(crearcarpeta_root);
+
+        creararchivo_root.setText("Crear Archivo");
+        creararchivo_root.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                creararchivo_rootMouseClicked(evt);
+            }
+        });
+        creararchivo_root.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creararchivo_rootActionPerformed(evt);
+            }
+        });
+        jp_root.add(creararchivo_root);
+
+        jf_crearArchivo.setPreferredSize(new java.awt.Dimension(528, 400));
+        jf_crearArchivo.setSize(new java.awt.Dimension(528, 400));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Crear Archivo");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 14, 183, 53));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Tamaño:");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 86, 28));
+        jPanel2.add(jt_nombrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 190, 30));
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Nombre:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 85, 86, 28));
+
+        jc_ext.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ".pdf", ".txt", ".fcb", ".doc", ".ppt", ".xls", " " }));
+        jPanel2.add(jc_ext, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 140, 30));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Extension:");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 86, 28));
+
+        jf_tamano.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        jPanel2.add(jf_tamano, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 190, 30));
+
+        jButton4.setText("Crear");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 180, 50));
+
+        javax.swing.GroupLayout jf_crearArchivoLayout = new javax.swing.GroupLayout(jf_crearArchivo.getContentPane());
+        jf_crearArchivo.getContentPane().setLayout(jf_crearArchivoLayout);
+        jf_crearArchivoLayout.setHorizontalGroup(
+            jf_crearArchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+        );
+        jf_crearArchivoLayout.setVerticalGroup(
+            jf_crearArchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+        );
+
+        jf_crearCarpeta.setPreferredSize(new java.awt.Dimension(511, 260));
+        jf_crearCarpeta.setSize(new java.awt.Dimension(511, 260));
+
+        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel3.setPreferredSize(new java.awt.Dimension(511, 260));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Creando Carpeta");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 150, 30));
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("Nombre:");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 86, 28));
+        jPanel3.add(jt_nombrecar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 190, 30));
+
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
+        jButton1.setText("Crear Carpeta");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 150, 30));
+
+        javax.swing.GroupLayout jf_crearCarpetaLayout = new javax.swing.GroupLayout(jf_crearCarpeta.getContentPane());
+        jf_crearCarpeta.getContentPane().setLayout(jf_crearCarpetaLayout);
+        jf_crearCarpetaLayout.setHorizontalGroup(
+            jf_crearCarpetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jf_crearCarpetaLayout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jf_crearCarpetaLayout.setVerticalGroup(
+            jf_crearCarpetaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 255, 153));
         jPanel1.setPreferredSize(new java.awt.Dimension(684, 467));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 684, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
-        );
+        jProgressBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jProgressBar1.setString("0%");
+        jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 590, 32));
+
+        jProgressBar2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 590, 32));
+
+        arbol.setBackground(new java.awt.Color(255, 153, 255));
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Root");
+        arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        arbol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                arbolMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(arbol);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 320, 360));
+
+        jList1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Mi Unidad", "Destacados", "Papelera" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jList1);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 210, 80));
+
+        jTable1.setBackground(new java.awt.Color(204, 204, 255));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Link", "Extension", "Tamaño"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 300, 360));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_arbolMouseClicked
+        if (jList1.getSelectedIndex() == 0 || jList1.isSelectionEmpty()) {
+            if (evt.getButton() == 3) {
+                int row = arbol.getClosestRowForLocation(evt.getX(), evt.getY());
+                arbol.setSelectionRow(row);
+                Object v1 = arbol.getSelectionPath().getLastPathComponent();
+                seleccionado = (DefaultMutableTreeNode) v1;
+                if (seleccionado.getUserObject() instanceof Carpeta) {
+                    jp_carpetas.show(evt.getComponent(), evt.getX(), evt.getY());
+                } else if (seleccionado.getUserObject() instanceof Archivo) {
+                    jp_archivo.show(evt.getComponent(), evt.getX(), evt.getY());
+                } else {
+                    jp_root.show(evt.getComponent(), evt.getX(), evt.getY());
+                }
+            }
+        } else if (jList1.getSelectedIndex() == 1) {
+
+        } else if (jList1.getSelectedIndex() == 2) {
+
+        }
+
+    }//GEN-LAST:event_arbolMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void creararchivo_carpetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_creararchivo_carpetaMouseClicked
+        jf_crearArchivo.setLocationRelativeTo(this);
+        jf_crearArchivo.setVisible(true);
+    }//GEN-LAST:event_creararchivo_carpetaMouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        if (jt_nombrear.getText().isBlank() || jf_tamano.getText().isBlank()) {
+            JOptionPane.showMessageDialog(jf_crearArchivo, "No puede haber un espacio en blanco", "Error", 2);
+        } else {
+            Archivo nuevo = new Archivo(jt_nombrear.getText(), (String) jc_ext.getSelectedItem(), Double.parseDouble(jf_tamano.getText()));
+            JOptionPane.showMessageDialog(jf_crearArchivo, "Se creo el archivo correctamente");
+            jf_crearArchivo.setVisible(false);
+            seleccionado.add(new DefaultMutableTreeNode(nuevo));
+            DefaultTreeModel modelo1 = (DefaultTreeModel) arbol.getModel();
+            admin.getMiunidad().setModel(modelo1);
+            DefaultTreeModel modelo2 = (DefaultTreeModel) admin.getMiunidad().getModel();
+            modelo2.reload();
+            arbol.setModel(modelo2);
+            jt_nombrear.setText("");
+            jf_tamano.setText("");
+            jc_ext.setSelectedIndex(0);
+            arbol.setModel(admin.getMiunidad().getModel());
+            this.setVisible(true);
+
+        }
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void creararchivo_rootMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_creararchivo_rootMouseClicked
+
+
+    }//GEN-LAST:event_creararchivo_rootMouseClicked
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+
+        if (jList1.getSelectedIndex() == 0 || jList1.isSelectionEmpty()) {
+            arbol.setModel(admin.getMiunidad().getModel());
+        } else if (jList1.getSelectedIndex() == 1) {
+            arbol.setModel(admin.getDestacados().getModel());
+        } else if (jList1.getSelectedIndex() == 2) {
+            arbol.setModel(admin.getPapelera().getModel());
+        }
+    }//GEN-LAST:event_jList1ValueChanged
+
+    private void creararchivo_rootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creararchivo_rootActionPerformed
+        this.setVisible(false);
+        jf_crearArchivo.setVisible(true);
+        jf_crearArchivo.setLocationRelativeTo(this);
+    }//GEN-LAST:event_creararchivo_rootActionPerformed
+
+    private void crearcarpeta_rootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearcarpeta_rootActionPerformed
+        this.setVisible(false);
+        jf_crearCarpeta.setVisible(true);
+        jf_crearCarpeta.setLocationRelativeTo(this);
+    }//GEN-LAST:event_crearcarpeta_rootActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        if (jt_nombrecar.getText().isBlank()) {
+            JOptionPane.showMessageDialog(jf_crearArchivo, "No puede haber un espacio en blanco", "Error", 2);
+        } else {
+            Carpeta nueva = new Carpeta(jt_nombrecar.getText());
+            JOptionPane.showMessageDialog(jf_crearArchivo, "Se creo la carpeta correctamente");
+            jf_crearCarpeta.setVisible(false);
+            seleccionado.add(new DefaultMutableTreeNode(nueva));
+            DefaultTreeModel modelo1 = (DefaultTreeModel) arbol.getModel();
+            admin.getMiunidad().setModel(modelo1);
+            DefaultTreeModel modelo2 = (DefaultTreeModel) admin.getMiunidad().getModel();
+            modelo2.reload();
+            jt_nombrecar.setText("");
+            arbol.setModel(modelo2);
+            this.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void crearcarpeta_carpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearcarpeta_carpetaActionPerformed
+        this.setVisible(false);
+        jf_crearCarpeta.setVisible(true);
+        jf_crearCarpeta.setLocationRelativeTo(this);
+    }//GEN-LAST:event_crearcarpeta_carpetaActionPerformed
+
+    private void creararchivo_carpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creararchivo_carpetaActionPerformed
+        this.setVisible(false);
+        jf_crearArchivo.setVisible(true);
+        jf_crearArchivo.setLocationRelativeTo(this);
+    }//GEN-LAST:event_creararchivo_carpetaActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        DefaultTreeModel modelo33 = (DefaultTreeModel) admin.getPapelera().getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modelo33.getRoot();
+        raiz.add(seleccionado);
+        modelo33.reload();
+        admin.getPapelera().setModel(modelo33);
+        seleccionado.removeFromParent();
+        DefaultTreeModel modelo1 = (DefaultTreeModel) arbol.getModel();
+        admin.getMiunidad().setModel(modelo1);
+        DefaultTreeModel modelo2 = (DefaultTreeModel) admin.getMiunidad().getModel();
+        modelo2.reload();
+        arbol.setModel(modelo2);
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void elimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elimActionPerformed
+        DefaultTreeModel modelo33 = (DefaultTreeModel) admin.getPapelera().getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modelo33.getRoot();
+        raiz.add(seleccionado);
+        modelo33.reload();
+        admin.getPapelera().setModel(modelo33);
+        seleccionado.removeFromParent();
+        DefaultTreeModel modelo1 = (DefaultTreeModel) arbol.getModel();
+        admin.getMiunidad().setModel(modelo1);
+        DefaultTreeModel modelo2 = (DefaultTreeModel) admin.getMiunidad().getModel();
+        modelo2.reload();
+        arbol.setModel(modelo2);
+    }//GEN-LAST:event_elimActionPerformed
 
     /**
      * @param args the command line arguments
@@ -94,6 +475,46 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTree arbol;
+    private javax.swing.JMenuItem creararchivo_carpeta;
+    private javax.swing.JMenuItem creararchivo_root;
+    private javax.swing.JMenuItem crearcarpeta_carpeta;
+    private javax.swing.JMenuItem crearcarpeta_root;
+    private javax.swing.JMenuItem descargarcarpeta;
+    private javax.swing.JMenuItem destacar;
+    private javax.swing.JMenuItem elim;
+    private javax.swing.JMenuItem eliminar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBar2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> jc_ext;
+    private javax.swing.JFrame jf_crearArchivo;
+    private javax.swing.JFrame jf_crearCarpeta;
+    private javax.swing.JFormattedTextField jf_tamano;
+    private javax.swing.JPopupMenu jp_archivo;
+    private javax.swing.JPopupMenu jp_carpetas;
+    private javax.swing.JPopupMenu jp_root;
+    private javax.swing.JTextField jt_nombrear;
+    private javax.swing.JTextField jt_nombrecar;
+    private javax.swing.JMenuItem mandardest;
     // End of variables declaration//GEN-END:variables
+DefaultMutableTreeNode seleccionado;
+    Carpeta carpetaseleccionada;
+    Archivo archivoseleccionado;
+    AdministrarTodos admin;
 }
