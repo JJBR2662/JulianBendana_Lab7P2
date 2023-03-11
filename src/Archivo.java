@@ -2,7 +2,7 @@
 import java.io.Serializable;
 
 import java.util.Random;
-public class Archivo {
+public class Archivo implements Serializable{
     private String nombre;
     private String link;
     private String extension;

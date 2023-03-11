@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class Carpeta {
+public class Carpeta implements Serializable{
     private String nombre;
     private String link;
     private ArrayList<Archivo> archivos = new ArrayList();

@@ -11,7 +11,7 @@ public class AdministrarTodos implements Serializable{
     private JTree papelera= new JTree();
     private ArrayList<Archivo> archivosdescrgados = new ArrayList();
     
-    private final long serialVersionUID = 265275723563L;
+    private final long serialVersionUID = 265275723568L;
 
     public AdministrarTodos() {
         javax.swing.tree.DefaultMutableTreeNode a = new javax.swing.tree.DefaultMutableTreeNode("Mi Unidad");

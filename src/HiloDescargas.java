@@ -6,6 +6,7 @@ public class HiloDescargas implements Runnable {
     private JProgressBar barra;
     private double peso;
     private boolean dale;
+    private boolean avanzar;
 
     public HiloDescargas() {
     }
@@ -13,7 +14,8 @@ public class HiloDescargas implements Runnable {
     public HiloDescargas(JProgressBar barra, double peso) {
         this.barra = barra;
         this.peso = peso;
-        this.dale = dale = false;
+        this.dale =  true;
+        this.avanzar = true;
     }
 
     public JProgressBar getBarra() {
@@ -47,17 +49,24 @@ public class HiloDescargas implements Runnable {
 
     @Override
     public void run() {
-        while (dale) {
-            if (barra.getValue() >= 100) {
-                dale = false;
-            } else {
-                barra.setValue(barra.getValue() + 10);
+        barra.setValue(0);
+        long time = (long) (peso/10);
+        int max = (int) time;
+        barra.setMaximum(max);
+        while (dale) {            
+            if (avanzar) {
+                barra.setValue(barra.getValue()+1);
+                if (barra.getValue()==time) {
+                    dale = false;
+                }
             }
+            
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
             }
         }
+        barra.setValue(0);
     }
 
 }

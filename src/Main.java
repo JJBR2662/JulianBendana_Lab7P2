@@ -1,5 +1,6 @@
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -17,12 +18,13 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     int bandera = 0;
+    Binario bin = new Binario("./Arboles.cbm");
 
     public Main() {
         initComponents();
         this.setLocationRelativeTo(null);
-        admin = new AdministrarTodos();
-        arbol.setModel((DefaultTreeModel) admin.getMiunidad().getModel());
+        bin.CargarArchivo();
+        arbol.setModel((DefaultTreeModel) bin.getAt().getMiunidad().getModel());
     }
 
     /**
@@ -71,6 +73,8 @@ public class Main extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         crearcarpeta_carpeta.setText("Crear Carpeta");
         crearcarpeta_carpeta.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +150,11 @@ public class Main extends javax.swing.JFrame {
 
         jf_crearArchivo.setPreferredSize(new java.awt.Dimension(528, 400));
         jf_crearArchivo.setSize(new java.awt.Dimension(528, 400));
+        jf_crearArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jf_crearArchivoMouseClicked(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 204));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -260,7 +269,7 @@ public class Main extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(arbol);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 320, 360));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 320, 360));
 
         jList1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -289,6 +298,15 @@ public class Main extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 300, 360));
+
+        jTextArea1.setBackground(new java.awt.Color(255, 0, 0));
+        jTextArea1.setColumns(20);
+        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextArea1.setRows(5);
+        jTextArea1.setText("No te voy a mentir, la barra funciona\npero hay veces que no, y no entiendo\nporque pero me estrese bastante\ny pues lo voy a mandar asi pero Nuila\nno seas malo, yo se que somos igual\nde troncos que Giroud en el Milan\no jugando para Francia pero entendenos\n");
+        jScrollPane3.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 250, 160));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -337,6 +355,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_creararchivo_carpetaMouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        bin.CargarArchivo();
         if (jt_nombrear.getText().isBlank() || jf_tamano.getText().isBlank()) {
             JOptionPane.showMessageDialog(jf_crearArchivo, "No puede haber un espacio en blanco", "Error", 2);
         } else {
@@ -345,14 +364,18 @@ public class Main extends javax.swing.JFrame {
             jf_crearArchivo.setVisible(false);
             seleccionado.add(new DefaultMutableTreeNode(nuevo));
             DefaultTreeModel modelo1 = (DefaultTreeModel) arbol.getModel();
-            admin.getMiunidad().setModel(modelo1);
-            DefaultTreeModel modelo2 = (DefaultTreeModel) admin.getMiunidad().getModel();
+            bin.getAt().getMiunidad().setModel(modelo1);
+            DefaultTreeModel modelo2 = (DefaultTreeModel) bin.getAt().getMiunidad().getModel();
             modelo2.reload();
             arbol.setModel(modelo2);
+            arbol.setModel(bin.getAt().getMiunidad().getModel());
+            bin.EscribirArchivo();
+            bin.CargarArchivo();
             jt_nombrear.setText("");
             jf_tamano.setText("");
             jc_ext.setSelectedIndex(0);
-            arbol.setModel(admin.getMiunidad().getModel());
+            arbol.setModel(bin.getAt().getMiunidad().getModel());
+
             this.setVisible(true);
 
         }
@@ -364,14 +387,16 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_creararchivo_rootMouseClicked
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
-
+        bin.CargarArchivo();
         if (jList1.getSelectedIndex() == 0 || jList1.isSelectionEmpty()) {
-            arbol.setModel(admin.getMiunidad().getModel());
+            arbol.setModel(bin.getAt().getMiunidad().getModel());
         } else if (jList1.getSelectedIndex() == 1) {
-            arbol.setModel(admin.getDestacados().getModel());
+            arbol.setModel(bin.getAt().getDestacados().getModel());
         } else if (jList1.getSelectedIndex() == 2) {
-            arbol.setModel(admin.getPapelera().getModel());
+            arbol.setModel(bin.getAt().getPapelera().getModel());
         }
+        bin.EscribirArchivo();
+        bin.CargarArchivo();
     }//GEN-LAST:event_jList1ValueChanged
 
     private void creararchivo_rootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creararchivo_rootActionPerformed
@@ -387,6 +412,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_crearcarpeta_rootActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        bin.CargarArchivo();
         if (jt_nombrecar.getText().isBlank()) {
             JOptionPane.showMessageDialog(jf_crearArchivo, "No puede haber un espacio en blanco", "Error", 2);
         } else {
@@ -395,11 +421,13 @@ public class Main extends javax.swing.JFrame {
             jf_crearCarpeta.setVisible(false);
             seleccionado.add(new DefaultMutableTreeNode(nueva));
             DefaultTreeModel modelo1 = (DefaultTreeModel) arbol.getModel();
-            admin.getMiunidad().setModel(modelo1);
-            DefaultTreeModel modelo2 = (DefaultTreeModel) admin.getMiunidad().getModel();
+            bin.getAt().getMiunidad().setModel(modelo1);
+            DefaultTreeModel modelo2 = (DefaultTreeModel) bin.getAt().getMiunidad().getModel();
             modelo2.reload();
             jt_nombrecar.setText("");
             arbol.setModel(modelo2);
+            bin.EscribirArchivo();
+            bin.CargarArchivo();
             this.setVisible(true);
         }
     }//GEN-LAST:event_jButton1MouseClicked
@@ -417,52 +445,84 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_creararchivo_carpetaActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        DefaultTreeModel modelo33 = (DefaultTreeModel) admin.getPapelera().getModel();
+        bin.CargarArchivo();
+        DefaultTreeModel modelo33 = (DefaultTreeModel) bin.getAt().getPapelera().getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo33.getRoot();
         raiz.add(seleccionado);
         modelo33.reload();
-        admin.getPapelera().setModel(modelo33);
+        bin.getAt().getPapelera().setModel(modelo33);
         seleccionado.removeFromParent();
         DefaultTreeModel modelo1 = (DefaultTreeModel) arbol.getModel();
-        admin.getMiunidad().setModel(modelo1);
-        DefaultTreeModel modelo2 = (DefaultTreeModel) admin.getMiunidad().getModel();
+        bin.getAt().getMiunidad().setModel(modelo1);
+        DefaultTreeModel modelo2 = (DefaultTreeModel) bin.getAt().getMiunidad().getModel();
         modelo2.reload();
         arbol.setModel(modelo2);
+        bin.EscribirArchivo();
+        bin.CargarArchivo();
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void elimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elimActionPerformed
-        DefaultTreeModel modelo33 = (DefaultTreeModel) admin.getPapelera().getModel();
+        bin.CargarArchivo();
+        DefaultTreeModel modelo33 = (DefaultTreeModel) bin.getAt().getPapelera().getModel();
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo33.getRoot();
         raiz.add(seleccionado);
         modelo33.reload();
-        admin.getPapelera().setModel(modelo33);
+        bin.getAt().getPapelera().setModel(modelo33);
         seleccionado.removeFromParent();
         DefaultTreeModel modelo1 = (DefaultTreeModel) arbol.getModel();
-        admin.getMiunidad().setModel(modelo1);
-        DefaultTreeModel modelo2 = (DefaultTreeModel) admin.getMiunidad().getModel();
+        bin.getAt().getMiunidad().setModel(modelo1);
+        DefaultTreeModel modelo2 = (DefaultTreeModel) bin.getAt().getMiunidad().getModel();
         modelo2.reload();
         arbol.setModel(modelo2);
+        bin.EscribirArchivo();
+        bin.CargarArchivo();
     }//GEN-LAST:event_elimActionPerformed
 
     private void descargarcarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descargarcarpetaActionPerformed
         double peso = 0;
         for (int i = 0; i < seleccionado.getChildCount(); i++) {
-            DefaultMutableTreeNode chavalo = (DefaultMutableTreeNode)seleccionado.getChildAt(i);
-            if (seleccionado.getChildAt(i) instanceof Carpeta) {
-                
+            DefaultMutableTreeNode chavalo = (DefaultMutableTreeNode) seleccionado.getChildAt(i);
+            if (chavalo.getUserObject() instanceof Carpeta) {
+
                 for (int j = 0; j < ((Carpeta) chavalo.getUserObject()).getArchivos().size(); j++) {
-                    peso+=((Carpeta) chavalo.getUserObject()).getArchivos().get(j).getTamanio();
+                    chiqui.setValue(0);
+                    peso = ((Carpeta) chavalo.getUserObject()).getArchivos().get(j).getTamanio();
+                    HiloDescargas hilo = new HiloDescargas(chiqui, peso);
+                    Thread h = new Thread(hilo);
+                    h.start();
+                    DefaultTableModel modlotabla = (DefaultTableModel) jTable1.getModel();
+                    String[] data = {"" + ((Archivo) chavalo.getUserObject()).getNombre(),
+                        "dive.google.com/" + ((Carpeta) chavalo.getUserObject()) + "/" + ((Archivo) chavalo.getUserObject()).getLink(),
+                        ((Archivo) chavalo.getUserObject()).getExtension(),
+                        "" + ((Archivo) chavalo.getUserObject()).getTamanio()
+                    };
+                    modlotabla.addRow(data);
+                    chiqui = hilo.getBarra();
                 }
-            } else {
-                peso+=((Archivo) chavalo.getUserObject()).getTamanio();
+            } else if (chavalo.getUserObject() instanceof Archivo) {
+                chiqui.setValue(0);
+                peso = ((Archivo) chavalo.getUserObject()).getTamanio();
+                HiloDescargas hilo = new HiloDescargas(chiqui, peso);
+                Thread h = new Thread(hilo);
+                h.start();
+                DefaultTableModel modlotabla = (DefaultTableModel) jTable1.getModel();
+                String[] data = {"" + ((Archivo) chavalo.getUserObject()).getNombre(),
+                    "dive.google.com/" + ((Archivo) chavalo.getUserObject()).getLink(),
+                    ((Archivo) chavalo.getUserObject()).getExtension(),
+                    "" + ((Archivo) chavalo.getUserObject()).getTamanio()
+                };
+                modlotabla.addRow(data);
+                chiqui = hilo.getBarra();
+
             }
 
         }
-        System.out.println(peso);
-        HiloDescargas hilo = new HiloDescargas(chiqui, peso);
-        Thread h = new Thread(hilo);
-        h.start();
+
     }//GEN-LAST:event_descargarcarpetaActionPerformed
+
+    private void jf_crearArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jf_crearArchivoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jf_crearArchivoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -524,8 +584,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JComboBox<String> jc_ext;
     private javax.swing.JFrame jf_crearArchivo;
     private javax.swing.JFrame jf_crearCarpeta;
@@ -541,5 +603,4 @@ public class Main extends javax.swing.JFrame {
 DefaultMutableTreeNode seleccionado;
     Carpeta carpetaseleccionada;
     Archivo archivoseleccionado;
-    AdministrarTodos admin;
 }
