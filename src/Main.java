@@ -63,8 +63,8 @@ public class Main extends javax.swing.JFrame {
         jt_nombrecar = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jProgressBar2 = new javax.swing.JProgressBar();
+        larga = new javax.swing.JProgressBar();
+        chiqui = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
         arbol = new javax.swing.JTree();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -94,6 +94,11 @@ public class Main extends javax.swing.JFrame {
         jp_carpetas.add(creararchivo_carpeta);
 
         descargarcarpeta.setText("Descargar");
+        descargarcarpeta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descargarcarpetaActionPerformed(evt);
+            }
+        });
         jp_carpetas.add(descargarcarpeta);
 
         destacar.setText("Destacar");
@@ -238,12 +243,12 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(684, 467));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jProgressBar1.setBackground(new java.awt.Color(255, 255, 255));
-        jProgressBar1.setString("0%");
-        jPanel1.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 590, 32));
+        larga.setBackground(new java.awt.Color(255, 255, 255));
+        larga.setString("0%");
+        jPanel1.add(larga, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 590, 32));
 
-        jProgressBar2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jProgressBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 590, 32));
+        chiqui.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(chiqui, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 590, 32));
 
         arbol.setBackground(new java.awt.Color(255, 153, 255));
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Root");
@@ -413,7 +418,7 @@ public class Main extends javax.swing.JFrame {
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
         DefaultTreeModel modelo33 = (DefaultTreeModel) admin.getPapelera().getModel();
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modelo33.getRoot();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo33.getRoot();
         raiz.add(seleccionado);
         modelo33.reload();
         admin.getPapelera().setModel(modelo33);
@@ -427,7 +432,7 @@ public class Main extends javax.swing.JFrame {
 
     private void elimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elimActionPerformed
         DefaultTreeModel modelo33 = (DefaultTreeModel) admin.getPapelera().getModel();
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modelo33.getRoot();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo33.getRoot();
         raiz.add(seleccionado);
         modelo33.reload();
         admin.getPapelera().setModel(modelo33);
@@ -438,6 +443,26 @@ public class Main extends javax.swing.JFrame {
         modelo2.reload();
         arbol.setModel(modelo2);
     }//GEN-LAST:event_elimActionPerformed
+
+    private void descargarcarpetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descargarcarpetaActionPerformed
+        double peso = 0;
+        for (int i = 0; i < seleccionado.getChildCount(); i++) {
+            DefaultMutableTreeNode chavalo = (DefaultMutableTreeNode)seleccionado.getChildAt(i);
+            if (seleccionado.getChildAt(i) instanceof Carpeta) {
+                
+                for (int j = 0; j < ((Carpeta) chavalo.getUserObject()).getArchivos().size(); j++) {
+                    peso+=((Carpeta) chavalo.getUserObject()).getArchivos().get(j).getTamanio();
+                }
+            } else {
+                peso+=((Archivo) chavalo.getUserObject()).getTamanio();
+            }
+
+        }
+        System.out.println(peso);
+        HiloDescargas hilo = new HiloDescargas(chiqui, peso);
+        Thread h = new Thread(hilo);
+        h.start();
+    }//GEN-LAST:event_descargarcarpetaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -476,6 +501,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree arbol;
+    private javax.swing.JProgressBar chiqui;
     private javax.swing.JMenuItem creararchivo_carpeta;
     private javax.swing.JMenuItem creararchivo_root;
     private javax.swing.JMenuItem crearcarpeta_carpeta;
@@ -496,8 +522,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
@@ -511,6 +535,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPopupMenu jp_root;
     private javax.swing.JTextField jt_nombrear;
     private javax.swing.JTextField jt_nombrecar;
+    private javax.swing.JProgressBar larga;
     private javax.swing.JMenuItem mandardest;
     // End of variables declaration//GEN-END:variables
 DefaultMutableTreeNode seleccionado;
